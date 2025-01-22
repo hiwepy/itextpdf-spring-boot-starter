@@ -25,21 +25,21 @@ import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.IBlockElement;
 import com.itextpdf.layout.element.IElement;
 import com.itextpdf.layout.font.FontProvider;
- 
+
 import java.io.IOException;
 import java.util.List;
- 
+
 /**
 * by 明明如月 github :https://github.com/chujianyun
 */
- 
+
 public class Html2PdfUtil {
- 
+
     /**
      * 字体所在目录
      */
     private static final String FONT_RESOURCE_DIR = "/font";
- 
+
     /**
      * @param htmlContent html文本
      * @param dest        目的文件路径，如 /xxx/xxx.pdf
@@ -55,8 +55,8 @@ public class Html2PdfUtil {
         fp.addDirectory(resources);
         props.setFontProvider(fp);
         // html中使用的图片等资源目录（图片也可以直接用url或者base64格式而不放到资源里）
-        // props.setBaseUri(resources); 
- 
+        // props.setBaseUri(resources);
+
         List<IElement> elements = HtmlConverter.convertToElements(htmlContent, props);
         PdfDocument pdf = new PdfDocument(new PdfWriter(dest));
         Document document = new Document(pdf, PageSize.A4.rotate(), false);
@@ -64,7 +64,7 @@ public class Html2PdfUtil {
             // 分页符
             if (element instanceof HtmlPageBreak) {
                 document.add((HtmlPageBreak) element);
- 
+
             //普通块级元素
             } else {
                 document.add((IBlockElement) element);
@@ -73,6 +73,3 @@ public class Html2PdfUtil {
         document.close();
     }
 }
-————————————————
-版权声明：本文为CSDN博主「明明如月小角落」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
-原文链接：https://blog.csdn.net/w605283073/article/details/83352856
